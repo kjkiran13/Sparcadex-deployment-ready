@@ -1,0 +1,2341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sparcadex Solutions — Mechanical Engineering Services</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #0b1d3a;
+      --blue: #1155cc;
+      --blue2: #1a73e8;
+      --cyan: #0ea5e9;
+      --silver: #6b7280;
+      --light: #f0f4f8;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #0057b8;
+      --grad: linear-gradient(135deg, #0b1d3a 0%, #1155cc 100%);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--light);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--blue);
+      border-radius: 2px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      transition: box-shadow .3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 2px 24px rgba(0, 0, 0, .09);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+    }
+
+    .logo-svg {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-wordmark {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .logo-top {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      letter-spacing: 2.5px;
+      background: linear-gradient(90deg, #0b1d3a, #1155cc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-bot {
+      font-family: 'Barlow', sans-serif;
+      font-size: .58rem;
+      font-weight: 600;
+      letter-spacing: 5px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a {
+      font-size: .88rem;
+      font-weight: 500;
+      color: var(--silver);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: background .2s, color .2s;
+    }
+
+    .nav-links a:hover {
+      background: var(--light);
+      color: var(--navy);
+    }
+
+    .nav-cta {
+      background: var(--blue) !important;
+      color: var(--white) !important;
+      padding: 9px 22px !important;
+      border-radius: 6px !important;
+      font-weight: 700 !important;
+      margin-left: 8px;
+      transition: background .2s, transform .2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent) !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: var(--navy);
+      display: block;
+      border-radius: 2px;
+      transition: all .3s;
+    }
+
+    .mob-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: white;
+      z-index: 199;
+      flex-direction: column;
+      padding: 90px 32px 40px;
+      gap: 4px;
+    }
+
+    .mob-menu.open {
+      display: flex;
+    }
+
+    .mob-menu a {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-decoration: none;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mob-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--silver);
+      cursor: pointer;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--grad);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px);
+      background-size: 56px 56px;
+      pointer-events: none;
+    }
+
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(14, 165, 233, .2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-left {
+      padding: 40px 64px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, .09);
+      border: 1px solid rgba(255, 255, 255, .16);
+      padding: 7px 18px;
+      border-radius: 100px;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .5px;
+      color: rgba(255, 255, 255, .75);
+      margin-bottom: 28px;
+    }
+
+    .hero-dot {
+      width: 6px;
+      height: 6px;
+      background: #0ea5e9;
+      border-radius: 50%;
+      animation: blink 2s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .3
+      }
+    }
+
+    .hero-h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.08;
+      color: var(--white);
+      margin-bottom: 22px;
+      letter-spacing: -.5px;
+    }
+
+    .hero-h1 .hl {
+      background: linear-gradient(90deg, #38bdf8, #7dd3fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-p {
+      font-size: 1.02rem;
+      color: rgba(255, 255, 255, .68);
+      line-height: 1.78;
+      max-width: 480px;
+      margin-bottom: 38px;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .btn-white {
+      background: white;
+      color: var(--navy);
+      font-family: 'Outfit', sans-serif;
+      font-size: .88rem;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .btn-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 1.5px solid rgba(255, 255, 255, .35);
+      font-family: 'Outfit', sans-serif;
+      font-size: .88rem;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background .2s, border-color .2s;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, .1);
+      border-color: white;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .5);
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .trust-item .ck {
+      color: #34d399;
+    }
+
+    /* Hero right — large image mosaic */
+    .hero-right {
+      position: relative;
+      z-index: 2;
+      align-self: stretch;
+      display: grid;
+      grid-template-rows: 1fr 180px;
+    }
+
+    .hero-img-top {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-left: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .hero-img-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+      border-left: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .hero-img-bottom img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-img-bottom img:first-child {
+      border-right: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--light);
+      padding: 22px 64px;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .trust-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .trust-chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: white;
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 100px;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-box {
+      padding: 32px 28px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: background .25s;
+      cursor: default;
+    }
+
+    .stat-box:last-child {
+      border-right: none;
+    }
+
+    .stat-box:hover {
+      background: var(--light);
+    }
+
+    .stat-icon {
+      font-size: 1.4rem;
+    }
+
+    .stat-num {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .stat-num span {
+      color: var(--blue);
+    }
+
+    .stat-lbl {
+      font-size: .8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ── SECTION ── */
+    section {
+      padding: 88px 64px;
+      position: relative;
+    }
+
+    .sec-center {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 56px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--blue);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      border: 1px solid #bfdbfe;
+    }
+
+    .sec-h2 {
+      font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 14px;
+      letter-spacing: -.3px;
+    }
+
+    .sec-p {
+      font-size: .97rem;
+      color: var(--muted);
+      line-height: 1.75;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--light);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .svc-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+    }
+
+    .svc-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(11, 29, 58, .12);
+    }
+
+    .svc-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .svc-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s;
+    }
+
+    .svc-card:hover .svc-img {
+      transform: scale(1.04);
+    }
+
+    .svc-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(11, 29, 58, .55) 0%, transparent 60%);
+    }
+
+    .svc-num-overlay {
+      position: absolute;
+      bottom: 14px;
+      left: 18px;
+      font-family: 'Outfit', sans-serif;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: rgba(255, 255, 255, .8);
+      text-transform: uppercase;
+    }
+
+    .svc-body {
+      padding: 28px 28px 32px;
+    }
+
+    .svc-icon-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .svc-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .svc-name {
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 9px;
+    }
+
+    .svc-desc {
+      font-size: .87rem;
+      color: var(--muted);
+      line-height: 1.72;
+      margin-bottom: 18px;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .svc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .tag {
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--blue);
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #how {
+      background: white;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 34px;
+      left: 12.5%;
+      right: 12.5%;
+      height: 1px;
+      background: var(--border);
+      z-index: 0;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-num {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 0 0 8px white, 0 0 0 9px var(--border);
+    }
+
+    .step-num.active {
+      background: var(--blue);
+      box-shadow: 0 0 0 8px white, 0 0 0 9px #bfdbfe;
+    }
+
+    .step-title {
+      font-size: .98rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .step-desc {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.62;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    /* ── MODELS ── */
+    #models {
+      background: var(--light);
+    }
+
+    .models-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .model-card {
+      background: white;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 36px 28px;
+      position: relative;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+    }
+
+    .model-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(11, 29, 58, .1);
+      border-color: var(--blue);
+    }
+
+    .model-card.popular {
+      border-color: var(--blue);
+    }
+
+    .pop-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue);
+      color: white;
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .model-icon {
+      font-size: 1.9rem;
+      margin-bottom: 16px;
+    }
+
+    .model-name {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 9px;
+    }
+
+    .model-desc {
+      font-size: .86rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 22px;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .model-feats {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 26px;
+    }
+
+    .mfeat {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: .84rem;
+      color: var(--text);
+    }
+
+    .mfeat .ck {
+      color: var(--blue);
+    }
+
+    .model-btn {
+      display: block;
+      text-align: center;
+      width: 100%;
+      font-family: 'Outfit', sans-serif;
+      font-size: .84rem;
+      font-weight: 700;
+      padding: 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 1.5px solid var(--blue);
+      color: var(--blue);
+      transition: background .2s, color .2s;
+    }
+
+    .model-btn:hover,
+    .model-card.popular .model-btn {
+      background: var(--blue);
+      color: white;
+    }
+
+    /* ── WHY US ── */
+    #why {
+      background: white;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-img-col {
+      position: relative;
+    }
+
+    .why-img-main {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+    }
+
+    .why-img-sm {
+      width: 54%;
+      height: 185px;
+      object-fit: cover;
+      border-radius: 12px;
+      position: absolute;
+      bottom: -28px;
+      right: -22px;
+      border: 4px solid white;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, .16);
+    }
+
+    .why-float {
+      position: absolute;
+      top: 30px;
+      left: -20px;
+      background: var(--navy);
+      color: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 8px 28px rgba(11, 29, 58, .3);
+    }
+
+    .why-float-num {
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .why-float-lbl {
+      font-size: .62rem;
+      color: rgba(255, 255, 255, .55);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .why-right {
+      padding-right: 16px;
+    }
+
+    .why-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 36px;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--light);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: border-color .25s, transform .25s;
+    }
+
+    .why-item:hover {
+      border-color: var(--blue);
+      transform: translateX(4px);
+    }
+
+    .wi-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .wi-title {
+      font-size: .96rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .wi-desc {
+      font-size: .84rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    /* ── CAPABILITIES SECTION (replaces contact form) ── */
+    #capabilities {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 88px 64px;
+    }
+
+    #capabilities::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+      background-size: 52px 52px;
+      pointer-events: none;
+    }
+
+    #capabilities::after {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(14, 165, 233, .15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cap-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-bottom: 64px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cap-pill {
+      display: inline-block;
+      background: rgba(255, 255, 255, .08);
+      color: rgba(255, 255, 255, .8);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255, 255, 255, .15);
+    }
+
+    .cap-h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+      letter-spacing: -.3px;
+      margin-bottom: 0;
+    }
+
+    .cap-desc {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, .6);
+      line-height: 1.75;
+      font-family: 'Barlow', sans-serif;
+      max-width: 440px;
+    }
+
+    .cap-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .cap-tool {
+      background: rgba(255, 255, 255, .07);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .75);
+      font-size: .78rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 8px;
+      letter-spacing: .5px;
+      transition: background .2s, border-color .2s;
+    }
+
+    .cap-tool:hover {
+      background: rgba(255, 255, 255, .12);
+      border-color: rgba(255, 255, 255, .25);
+    }
+
+    /* Capability image mosaic */
+    .cap-mosaic {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cap-mosaic-img {
+      width: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+      border: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .cap-mosaic-img.tall {
+      height: 260px;
+    }
+
+    .cap-mosaic-img.short {
+      height: 170px;
+    }
+
+    .cap-mosaic-label {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(11, 29, 58, .85);
+      color: white;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 6px;
+    }
+
+    .cap-mosaic-wrap {
+      position: relative;
+    }
+
+    /* Capability cards grid */
+    .cap-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cap-card {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 12px;
+      padding: 28px 24px;
+      transition: background .3s, border-color .3s, transform .3s;
+    }
+
+    .cap-card:hover {
+      background: rgba(255, 255, 255, .1);
+      border-color: rgba(14, 165, 233, .4);
+      transform: translateY(-4px);
+    }
+
+    .cap-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .cap-card-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      background: rgba(14, 165, 233, .15);
+      border: 1px solid rgba(14, 165, 233, .25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .cap-card-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .cap-card-desc {
+      font-size: .84rem;
+      color: rgba(255, 255, 255, .55);
+      line-height: 1.65;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .cap-bar {
+      height: 3px;
+      background: rgba(255, 255, 255, .08);
+      border-radius: 2px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .cap-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--cyan), #38bdf8);
+      width: 0;
+      transition: width 1.2s cubic-bezier(.25, 1, .5, 1);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--light);
+      padding: 88px 64px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .ccard {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color .25s, transform .3s, box-shadow .3s;
+    }
+
+    .ccard:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(11, 29, 58, .1);
+    }
+
+    .ccard-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .ccard-label {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    .ccard-val {
+      font-size: .9rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    .ccard-val a {
+      color: var(--text);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .ccard-val a:hover {
+      color: var(--blue);
+    }
+
+    .contact-form-wrap {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 12px 32px rgba(11, 29, 58, .06);
+      margin-top: 20px;
+    }
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font: inherit;
+      color: var(--text);
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px rgba(17, 85, 204, .08);
+      background: white;
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--navy));
+      color: white;
+      padding: 14px 22px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .form-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(17, 85, 204, .18);
+    }
+
+    .form-status {
+      margin-top: 12px;
+      min-height: 24px;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .form-status.success {
+      color: #0f766e;
+    }
+
+    .form-status.error {
+      color: #b91c1c;
+    }
+
+    /* Map full width */
+    .contact-map {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .06);
+    }
+
+    .contact-map iframe {
+      width: 100%;
+      height: 280px;
+      display: block;
+      border: none;
+      filter: saturate(.7);
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--grad);
+      padding: 72px 64px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: 180px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255, 255, 255, .06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-h {
+      font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+      font-weight: 900;
+      color: white;
+      margin-bottom: 8px;
+      letter-spacing: -.3px;
+    }
+
+    .cta-p {
+      font-size: .97rem;
+      color: rgba(255, 255, 255, .62);
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      color: rgba(255, 255, 255, .55);
+      padding: 56px 64px 28px;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .fbrand {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: white;
+      margin-bottom: 4px;
+    }
+
+    .fbrand-sub {
+      font-size: .6rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .35);
+      margin-bottom: 14px;
+    }
+
+    .fdesc {
+      font-size: .84rem;
+      color: rgba(255, 255, 255, .45);
+      line-height: 1.7;
+      max-width: 240px;
+      font-family: 'Barlow', sans-serif;
+    }
+
+    .fcol h5 {
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .35);
+      margin-bottom: 16px;
+    }
+
+    .fcol ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .fcol ul li a {
+      font-size: .86rem;
+      color: rgba(255, 255, 255, .5);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .fcol ul li a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .fcopy {
+      font-size: .75rem;
+      color: rgba(255, 255, 255, .3);
+    }
+
+    /* ── WA BTN ── */
+    .wa-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 500;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #25d366;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, .4);
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      animation: popIn .5s .8s both;
+    }
+
+    .wa-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 28px rgba(37, 211, 102, .5);
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(.4)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    .wa-tip {
+      position: absolute;
+      right: 66px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--navy);
+      color: white;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+    }
+
+    .wa-btn:hover .wa-tip {
+      opacity: 1;
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px) {
+      nav {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      #hero {
+        grid-template-columns: 1fr;
+        padding: 90px 0 0;
+      }
+
+      .hero-left {
+        padding: 36px 24px;
+      }
+
+      .hero-right {
+        height: 240px;
+      }
+
+      .hero-img-top {
+        height: 140px;
+      }
+
+      .hero-img-bottom img {
+        height: 100px;
+      }
+
+      .trust-bar {
+        padding: 16px 24px;
+        gap: 14px;
+      }
+
+      .stats-strip {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stat-box {
+        border-bottom: 1px solid var(--border);
+      }
+
+      section {
+        padding: 56px 24px;
+      }
+
+      #capabilities {
+        padding: 56px 24px;
+      }
+
+      .services-grid,
+      .models-grid,
+      .cap-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .why-img-sm,
+      .why-float {
+        display: none;
+      }
+
+      .cap-header {
+        grid-template-columns: 1fr;
+      }
+
+      .cap-mosaic {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cap-mosaic-img.tall {
+        height: 160px;
+      }
+
+      .cap-mosaic-img.short {
+        height: 110px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cta-banner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 48px 24px;
+      }
+
+      .cta-btns {
+        justify-content: center;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      footer {
+        padding: 40px 24px 20px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr;
+        gap: 36px;
+      }
+
+      .steps::before {
+        display: none;
+      }
+
+      .logo-img {
+        height: 40px;
+        /* controls size */
+        max-width: 150px;
+        /* PREVENTS it from stretching too wide */
+        width: auto;
+
+        object-fit: contain;
+        display: block;
+
+        filter: drop-shadow(0 0 12px rgba(0, 200, 255, 0.6));
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- WA FLOAT -->
+  <a href="https://wa.me/916360535683" target="_blank" class="wa-btn" title="Chat on WhatsApp">
+    <span class="wa-tip">Chat on WhatsApp</span>💬
+  </a>
+
+  <!-- MOBILE MENU -->
+  <div class="mob-menu" id="mobMenu">
+    <button class="mob-close" onclick="closeMob()">✕</button>
+    <a href="#services" onclick="closeMob()">Services</a>
+    <a href="#how" onclick="closeMob()">How It Works</a>
+    <a href="#models" onclick="closeMob()">Support Models</a>
+    <a href="#why" onclick="closeMob()">Why Us</a>
+    <a href="#capabilities" onclick="closeMob()">Capabilities</a>
+    <a href="#contact" onclick="closeMob()">Contact</a>
+  </div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <img src="q1.jpeg" alt="SPARCADEX Logo"
+        style="height: 42px; width: auto; max-width: 180px; object-fit: contain; border-radius: 4px;" class="logo-img">
+      <div class="logo-wordmark">
+        <span class="logo-top">SPARCADEX</span>
+        <span class="logo-bot">Solutions</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#how">How It Works</a>
+      <a href="#models">Support Models</a>
+      <a href="#why">Why Us</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+    </div>
+    <button class="hamburger" onclick="toggleMob()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section id="hero">
+    <div class="hero-left">
+      <div class="hero-badge"><span class="hero-dot"></span>Bengaluru, Karnataka · Open for Projects</div>
+      <h1 class="hero-h1">Precision Engineering,<br /><span class="hl">From Concept<br />to Completion.</span></h1>
+      <p class="hero-p">End-to-end mechanical engineering support — jigs, fixtures, SPMs, conveyor systems, CAD design,
+        manufacturing coordination, and quality inspections.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn-white">Explore Services →</a>
+        <a href="#contact" class="btn-outline">Get a Free Quote</a>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><span class="ck">✔</span> Industry-Standard CAD Tools</div>
+        <div class="trust-item"><span class="ck">✔</span> Flexible Engagement Models</div>
+        <div class="trust-item"><span class="ck">✔</span> 100% Custom Solutions</div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=85"
+        alt="Mechanical engineer working" class="hero-img-top" onerror="this.style.background='#1a2a4a'" />
+      <div class="hero-img-bottom">
+        <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500&q=85" alt="Manufacturing"
+          onerror="this.style.background='#1a2a4a'" />
+        <img src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=500&q=85" alt="CAD Design"
+          onerror="this.style.background='#1a2a4a'" />
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar">
+    <span class="trust-label">Serving Industries</span>
+    <div class="trust-chips">
+      <span class="chip">🏭 Automotive</span>
+      <span class="chip">✈️ Aerospace</span>
+      <span class="chip">🤖 Industrial Automation</span>
+      <span class="chip">🏗️ Infrastructure</span>
+      <span class="chip">⚙️ General Manufacturing</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat-box reveal"><span class="stat-icon">⚙️</span>
+      <div class="stat-num">4<span>+</span></div>
+      <div class="stat-lbl">Core Engineering Services</div>
+    </div>
+    <div class="stat-box reveal" style="transition-delay:.07s"><span class="stat-icon">📐</span>
+      <div class="stat-num">3</div>
+      <div class="stat-lbl">Flexible Engagement Models</div>
+    </div>
+    <div class="stat-box reveal" style="transition-delay:.14s"><span class="stat-icon">🎯</span>
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-lbl">Custom-Built Solutions</div>
+    </div>
+    <div class="stat-box reveal" style="transition-delay:.21s"><span class="stat-icon">⚡</span>
+      <div class="stat-num">24<span>h</span></div>
+      <div class="stat-lbl">Quote Response Time</div>
+    </div>
+  </div>
+
+  <!-- ══ SERVICES ══ -->
+  <section id="services">
+    <div class="sec-center reveal">
+      <span class="pill">Our Services</span>
+      <h2 class="sec-h2">Everything You Need,<br />Under One Roof</h2>
+      <p class="sec-p">From the first sketch to the final quality report — we own the entire engineering process so you
+        never have to manage multiple vendors.</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- 01 -->
+      <div class="svc-card reveal">
+        <div class="svc-img-wrap">
+          <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=85" alt="Concept Generation"
+            class="svc-img"
+            onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'" />
+          <div class="svc-img-overlay"></div>
+          <div class="svc-num-overlay">Service 01</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-icon-row">
+            <div class="svc-icon">💡</div>
+          </div>
+          <div class="svc-name">Concept &amp; Idea Generation</div>
+          <p class="svc-desc">We convert your requirements into practical engineering concepts and workable solutions —
+            from initial brief to a validated, executable engineering plan ready for design.</p>
+          <div class="svc-tags"><span class="tag">Feasibility Studies</span><span class="tag">Concept
+              Sketching</span><span class="tag">Requirements Analysis</span><span class="tag">Engineering Briefs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 -->
+      <div class="svc-card reveal" style="transition-delay:.1s">
+        <div class="svc-img-wrap">
+          <img src="https://www.crdprecision.co.uk/wp-content/uploads/2021/01/Jigs-and-Fixtures-1024x683.jpg"
+            alt="Mechanical Design" class="svc-img"
+            onerror="this.src='https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&q=80'" />
+          <div class="svc-img-overlay"></div>
+          <div class="svc-num-overlay">Service 02</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-icon-row">
+            <div class="svc-icon">⚙️</div>
+          </div>
+          <div class="svc-name">Mechanical Design Services</div>
+          <p class="svc-desc">Jigs &amp; fixtures, conveyor systems, special purpose machines, and custom mechanical
+            designs using industry-standard software. Full GD&amp;T drawings and documentation included.</p>
+          <div class="svc-tags"><span class="tag">Jigs &amp; Fixtures</span><span class="tag">Conveyor
+              Systems</span><span class="tag">SPM Design</span><span class="tag">3D CAD Modeling</span></div>
+        </div>
+      </div>
+
+      <!-- 03 -->
+      <div class="svc-card reveal" style="transition-delay:.15s">
+        <div class="svc-img-wrap">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=85" alt="Manufacturing Support"
+            class="svc-img"
+            onerror="this.src='https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=800&q=80'" />
+          <div class="svc-img-overlay"></div>
+          <div class="svc-num-overlay">Service 03</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-icon-row">
+            <div class="svc-icon">🏭</div>
+          </div>
+          <div class="svc-name">Manufacturing Support</div>
+          <p class="svc-desc">Custom manufacturing coordination, fabrication support, and design-for-manufacturing
+            solutions. We bridge the gap between your design office and the shop floor seamlessly.</p>
+          <div class="svc-tags"><span class="tag">DFM Analysis</span><span class="tag">Fabrication Support</span><span
+              class="tag">Vendor Coordination</span><span class="tag">BOM Management</span></div>
+        </div>
+      </div>
+
+      <!-- 04 -->
+      <div class="svc-card reveal" style="transition-delay:.2s">
+        <div class="svc-img-wrap">
+          <img src="https://www.chandrainspection.com/wp-content/uploads/2022/02/Quality-Metrology.jpg"
+            alt="Quality Inspection" class="svc-img"
+            onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80'" />
+          <div class="svc-img-overlay"></div>
+          <div class="svc-num-overlay">Service 04</div>
+        </div>
+        <div class="svc-body">
+          <div class="svc-icon-row">
+            <div class="svc-icon">🔬</div>
+          </div>
+          <div class="svc-name">Quality Inspections</div>
+          <p class="svc-desc">Dimensional checks, functional inspections, and quality verification to ensure reliable
+            output. Every component validated against specification before it ships from the floor.</p>
+          <div class="svc-tags"><span class="tag">Dimensional Checks</span><span class="tag">Functional
+              Testing</span><span class="tag">Quality Reports</span><span class="tag">Inspection Plans</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ HOW IT WORKS ══ -->
+  <section id="how">
+    <div class="sec-center reveal">
+      <span class="pill">How It Works</span>
+      <h2 class="sec-h2">Simple, Transparent Process</h2>
+      <p class="sec-p">From your first inquiry to the final deliverable — here's exactly how we work with you, step by
+        step.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num active">1</div>
+        <div class="step-title">Share Requirements</div>
+        <p class="step-desc">Tell us your project scope, timeline, and the engineering challenge you're facing.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.1s">
+        <div class="step-num">2</div>
+        <div class="step-title">We Propose a Plan</div>
+        <p class="step-desc">We review your needs and recommend the right service and engagement model with a clear
+          quote.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.2s">
+        <div class="step-num">3</div>
+        <div class="step-title">Engineering Begins</div>
+        <p class="step-desc">Our engineers get to work — designing, modeling, coordinating — with regular progress
+          updates.</p>
+      </div>
+      <div class="step reveal" style="transition-delay:.3s">
+        <div class="step-num">4</div>
+        <div class="step-title">Deliver &amp; Support</div>
+        <p class="step-desc">You receive fully documented deliverables with post-delivery support to ensure everything
+          works.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SUPPORT MODELS ══ -->
+  <section id="models">
+    <div class="sec-center reveal">
+      <span class="pill">Engagement Models</span>
+      <h2 class="sec-h2">Flexible Support<br />That Fits Your Needs</h2>
+      <p class="sec-p">Choose the engagement model that matches your project scale and budget. Contact us for a custom
+        arrangement.</p>
+    </div>
+    <div class="models-grid">
+      <div class="model-card reveal">
+        <div class="model-icon">🕐</div>
+        <div class="model-name">Part-Time Design Support</div>
+        <p class="model-desc">Dedicated engineering hours on a flexible schedule — perfect for reviews, modifications,
+          or expert input without full-time commitment.</p>
+        <div class="model-feats">
+          <div class="mfeat"><span class="ck">✔</span> Flexible scheduling</div>
+          <div class="mfeat"><span class="ck">✔</span> Ongoing design reviews</div>
+          <div class="mfeat"><span class="ck">✔</span> Expert consultation</div>
+          <div class="mfeat"><span class="ck">✔</span> Pay-as-you-go</div>
+        </div>
+        <a href="#contact" class="model-btn">Get Started</a>
+      </div>
+      <div class="model-card popular reveal" style="transition-delay:.1s">
+        <div class="pop-badge">Most Popular</div>
+        <div class="model-icon">🖥️</div>
+        <div class="model-name">Full-Time Design Support</div>
+        <p class="model-desc">A dedicated engineer fully integrated into your team — ideal for sustained product
+          development and scaling engineering capacity.</p>
+        <div class="model-feats">
+          <div class="mfeat"><span class="ck">✔</span> Dedicated engineer</div>
+          <div class="mfeat"><span class="ck">✔</span> Full-cycle development</div>
+          <div class="mfeat"><span class="ck">✔</span> Team integration</div>
+          <div class="mfeat"><span class="ck">✔</span> Priority response</div>
+        </div>
+        <a href="#contact" class="model-btn">Get Started</a>
+      </div>
+      <div class="model-card reveal" style="transition-delay:.2s">
+        <div class="model-icon">📦</div>
+        <div class="model-name">Project-Based Work</div>
+        <p class="model-desc">End-to-end delivery on a defined scope — fixed deliverables, clear milestones, full
+          documentation. Best for one-off products or prototypes.</p>
+        <div class="model-feats">
+          <div class="mfeat"><span class="ck">✔</span> Fixed scope &amp; cost</div>
+          <div class="mfeat"><span class="ck">✔</span> Clear milestones</div>
+          <div class="mfeat"><span class="ck">✔</span> Full documentation</div>
+          <div class="mfeat"><span class="ck">✔</span> Post-delivery support</div>
+        </div>
+        <a href="#contact" class="model-btn">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ WHY US ══ -->
+  <section id="why">
+    <div class="why-grid">
+      <div class="why-img-col reveal">
+        <img src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=800&q=85" alt="Engineering precision"
+          class="why-img-main" onerror="this.style.background='#e8f0fe'" />
+        <div class="why-float">
+          <div class="why-float-num">100%</div>
+          <div class="why-float-lbl">Custom Solutions</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=85" alt="CAD tools"
+          class="why-img-sm" onerror="this.style.background='#e8f0fe'" />
+      </div>
+      <div class="why-right">
+        <span class="pill reveal">Why Sparcadex</span>
+        <h2 class="sec-h2 reveal" style="text-align:left;margin-bottom:0;">Engineering You<br />Can Rely On.</h2>
+        <div class="why-list">
+          <div class="why-item reveal">
+            <div class="wi-icon">🎯</div>
+            <div>
+              <div class="wi-title">End-to-End Ownership</div>
+              <p class="wi-desc">From concept sketches to the final manufactured part — we own the entire process so you
+                don't juggle multiple vendors.</p>
+            </div>
+          </div>
+          <div class="why-item reveal" style="transition-delay:.08s">
+            <div class="wi-icon">🛠️</div>
+            <div>
+              <div class="wi-title">Industry-Standard Tools</div>
+              <p class="wi-desc">SolidWorks, AutoCAD, CATIA, ANSYS — the same tools top-tier OEMs trust for design
+                quality and compatibility.</p>
+            </div>
+          </div>
+          <div class="why-item reveal" style="transition-delay:.16s">
+            <div class="wi-icon">⚡</div>
+            <div>
+              <div class="wi-title">Flexible Engagement</div>
+              <p class="wi-desc">Three support models mean you pay for exactly what you need — no bloated retainers, no
+                wasted hours.</p>
+            </div>
+          </div>
+          <div class="why-item reveal" style="transition-delay:.24s">
+            <div class="wi-icon">📍</div>
+            <div>
+              <div class="wi-title">Bengaluru Based</div>
+              <p class="wi-desc">Located in India's engineering hub — we know local manufacturing ecosystems and vendor
+                networks inside out.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CAPABILITIES (replaces send message) ══ -->
+  <section id="capabilities">
+    <!-- Header -->
+    <div class="cap-header">
+      <div>
+        <span class="cap-pill">Our Capabilities</span>
+        <h2 class="cap-h2">Built to Handle<br />Complex Engineering.</h2>
+      </div>
+      <div>
+        <p class="cap-desc">Sparcadex brings deep technical expertise across CAD platforms, simulation, and
+          manufacturing workflows — delivering solutions that are precise, documented, and ready to manufacture.</p>
+        <div class="cap-tools">
+          <span class="cap-tool">SolidWorks</span>
+          <span class="cap-tool">AutoCAD</span>
+          <span class="cap-tool">CATIA V5</span>
+          <span class="cap-tool">ANSYS</span>
+          <span class="cap-tool">Fusion 360</span>
+          <span class="cap-tool">GD&amp;T</span>
+          <span class="cap-tool">FEA Simulation</span>
+          <span class="cap-tool">DFM Analysis</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Image mosaic + cards -->
+    <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:32px;align-items:start;position:relative;z-index:2;">
+      <!-- Mosaic -->
+      <div class="cap-mosaic reveal">
+        <div class="cap-mosaic-wrap">
+          <img src="https://www.crdprecision.co.uk/wp-content/uploads/2021/01/Jigs-and-Fixtures-1024x683.jpg"
+            alt="Jigs and Fixtures" class="cap-mosaic-img tall"
+            onerror="this.src='https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500&q=80'" />
+          <div class="cap-mosaic-label">Jigs &amp; Fixtures</div>
+        </div>
+        <div class="cap-mosaic-wrap">
+          <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=500&q=85" alt="CAD Engineering"
+            class="cap-mosaic-img tall"
+            onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=80'" />
+          <div class="cap-mosaic-label">CAD Modeling</div>
+        </div>
+        <div class="cap-mosaic-wrap">
+          <img src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=500&q=85" alt="Manufacturing"
+            class="cap-mosaic-img short"
+            onerror="this.src='https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=500&q=80'" />
+          <div class="cap-mosaic-label">Manufacturing</div>
+        </div>
+        <div class="cap-mosaic-wrap">
+          <img src="https://www.chandrainspection.com/wp-content/uploads/2022/02/Quality-Metrology.jpg"
+            alt="Quality Inspection" class="cap-mosaic-img short"
+            onerror="this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?w=500&q=80'" />
+          <div class="cap-mosaic-label">Quality Control</div>
+        </div>
+      </div>
+
+      <!-- Capability cards -->
+      <div class="cap-cards">
+        <div class="cap-card reveal">
+          <div class="cap-card-top">
+            <div class="cap-card-icon">🖥️</div>
+            <div class="cap-card-name">3D Parametric Modeling</div>
+          </div>
+          <p class="cap-card-desc">Full parametric assemblies, part modeling, exploded views, and manufacturing-ready
+            drawings across SolidWorks, CATIA, and Fusion 360.</p>
+          <div class="cap-bar">
+            <div class="cap-bar-fill" data-w="95"></div>
+          </div>
+        </div>
+        <div class="cap-card reveal" style="transition-delay:.07s">
+          <div class="cap-card-top">
+            <div class="cap-card-icon">📐</div>
+            <div class="cap-card-name">GD&amp;T &amp; Technical Drawings</div>
+          </div>
+          <p class="cap-card-desc">ISO/ASME-compliant 2D drawings with full geometric dimensioning and tolerancing —
+            ready for vendor quotation and shop floor use.</p>
+          <div class="cap-bar">
+            <div class="cap-bar-fill" data-w="90"></div>
+          </div>
+        </div>
+        <div class="cap-card reveal" style="transition-delay:.14s">
+          <div class="cap-card-top">
+            <div class="cap-card-icon">🔩</div>
+            <div class="cap-card-name">Jigs, Fixtures &amp; SPM</div>
+          </div>
+          <p class="cap-card-desc">Custom tooling design for machining, welding, and assembly operations. Special
+            purpose machines engineered for your production process.</p>
+          <div class="cap-bar">
+            <div class="cap-bar-fill" data-w="88"></div>
+          </div>
+        </div>
+        <div class="cap-card reveal" style="transition-delay:.07s">
+          <div class="cap-card-top">
+            <div class="cap-card-icon">🔬</div>
+            <div class="cap-card-name">FEA &amp; Simulation</div>
+          </div>
+          <p class="cap-card-desc">Structural, thermal, and modal analysis using ANSYS — validating designs before
+            physical prototyping to reduce cost and risk.</p>
+          <div class="cap-bar">
+            <div class="cap-bar-fill" data-w="82"></div>
+          </div>
+        </div>
+        <div class="cap-card reveal" style="transition-delay:.14s">
+          <div class="cap-card-top">
+            <div class="cap-card-icon">🏭</div>
+            <div class="cap-card-name">Design for Manufacturing</div>
+          </div>
+          <p class="cap-card-desc">DFM-optimised designs that cut machining time, reduce scrap, and improve assembly
+            ease — bridging design intent and production reality.</p>
+          <div class="cap-bar">
+            <div class="cap-bar-fill" data-w="85"></div>
+          </div>
+        </div>
+        <div class="cap-card reveal" style="transition-delay:.21s">
+          <div class="cap-card-top">
+            <div class="cap-card-icon">✅</div>
+            <div class="cap-card-name">Quality &amp; Inspection</div>
+          </div>
+          <p class="cap-card-desc">Dimensional verification, CMM reporting, and functional testing protocols — ensuring
+            every component meets specification before delivery.</p>
+          <div class="cap-bar">
+            <div class="cap-bar-fill" data-w="92"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTACT ══ -->
+  <section id="contact">
+    <div class="sec-center reveal">
+      <span class="pill">Contact Us</span>
+      <h2 class="sec-h2">Get in Touch</h2>
+      <p class="sec-p">Reach out via any of the channels below — we respond within 24 hours to discuss your project and
+        the right engagement model for you.</p>
+    </div>
+
+    <div class="contact-grid reveal">
+      <div class="ccard">
+        <div class="ccard-icon">📞</div>
+        <div class="ccard-label">Phone</div>
+        <div class="ccard-val">
+          <a href="tel:6360535683">6360535683</a><br />
+          <a href="tel:8296309354">8296309354</a>
+        </div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-icon">✉️</div>
+        <div class="ccard-label">Email</div>
+        <div class="ccard-val"><a href="mailto:sparcadex.Sttn@gmail.com">sparcadex.Sttn@gmail.com</a></div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-icon">🌐</div>
+        <div class="ccard-label">Website</div>
+        <div class="ccard-val"><a href="http://www.sparcadexsolutions.in" target="_blank">www.sparcadexsolutions.in</a>
+        </div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-icon">📍</div>
+        <div class="ccard-label">Location</div>
+        <div class="ccard-val">Bengaluru,<br />Karnataka, India</div>
+      </div>
+    </div>
+
+    <div class="contact-form-wrap reveal">
+      <form id="contactForm" class="contact-form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your full name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" placeholder="Optional" />
+        </div>
+
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" placeholder="Optional" />
+        </div>
+
+        <div class="form-group full">
+          <label for="projectType">Project Type</label>
+          <select id="projectType" name="projectType">
+            <option value="">Select project type</option>
+            <option value="Mechanical Design">Mechanical Design</option>
+            <option value="CAD Drafting">CAD Drafting</option>
+            <option value="FEA Simulation">FEA Simulation</option>
+            <option value="Manufacturing Support">Manufacturing Support</option>
+            <option value="Quality Inspection">Quality Inspection</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label for="message">Project Details</label>
+          <textarea id="message" name="message" placeholder="Tell us about your engineering requirements"
+            required></textarea>
+        </div>
+
+        <div class="form-group full">
+          <button type="submit" class="form-submit">Send Inquiry</button>
+          <div id="formStatus" class="form-status" aria-live="polite"></div>
+        </div>
+      </form>
+    </div>
+
+    <div class="contact-map reveal" style="margin-top:20px">
+      <iframe src="https://maps.google.com/maps?q=Bengaluru,Karnataka,India&output=embed&z=12"
+        title="Sparcadex Location" allowfullscreen loading="lazy">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <div>
+      <div class="cta-h">Ready to Start Your Engineering Project?</div>
+      <p class="cta-p">Get a free consultation and quote within 24 hours — no commitment required.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="mailto:sparcadex.Sttn@gmail.com" class="btn-white">✉ Email Us →</a>
+      <a href="tel:6360535683" class="btn-outline">📞 Call Now</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="fbrand">SPARCADEX</div>
+        <div class="fbrand-sub">Solutions</div>
+        <p class="fdesc">End-to-end mechanical engineering support — from concept to completion. Bengaluru, Karnataka,
+          India.</p>
+      </div>
+      <div class="fcol">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#services">Concept Generation</a></li>
+          <li><a href="#services">Mechanical Design</a></li>
+          <li><a href="#services">Manufacturing Support</a></li>
+          <li><a href="#services">Quality Inspections</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Engagement</h5>
+        <ul>
+          <li><a href="#models">Part-Time Support</a></li>
+          <li><a href="#models">Full-Time Support</a></li>
+          <li><a href="#models">Project-Based Work</a></li>
+          <li><a href="#how">How It Works</a></li>
+        </ul>
+      </div>
+      <div class="fcol">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#why">Why Sparcadex</a></li>
+          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="http://www.sparcadexsolutions.in" target="_blank">Website</a></li>
+          <li><a href="mailto:sparcadex.Sttn@gmail.com">Email Us</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="fcopy">© 2025 Sparcadex Solutions · Bengaluru, Karnataka · All Rights Reserved</span>
+      <span class="fcopy">Mechanical Engineering · Concept to Completion</span>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar
+    window.addEventListener('scroll', () =>
+      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40)
+    );
+
+    // Mobile menu
+    function toggleMob() { document.getElementById('mobMenu').classList.toggle('open'); }
+    function closeMob() { document.getElementById('mobMenu').classList.remove('open'); }
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+
+    // Scroll reveal + capability bars
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('visible');
+        e.target.querySelectorAll('.cap-bar-fill').forEach(b => {
+          setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 300);
+        });
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+
+    contactForm?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const formData = new FormData(contactForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      formStatus.textContent = 'Sending your inquiry...';
+      formStatus.className = 'form-status';
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || 'Unable to send your inquiry.');
+        }
+
+        formStatus.textContent = result.message;
+        formStatus.className = 'form-status success';
+        contactForm.reset();
+      } catch (error) {
+        formStatus.textContent = error.message || 'Something went wrong. Please try again.';
+        formStatus.className = 'form-status error';
+      }
+    });
+  </script>
+</body>
+
+</html>

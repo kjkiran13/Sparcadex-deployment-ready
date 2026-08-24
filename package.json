@@ -1,0 +1,17 @@
+{
+  "name": "sparcadex-solutions-backend",
+  "version": "1.0.0",
+  "description": "Sparcadex Solutions website and Express backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "nodemailer": "^7.0.5",
+    "pg": "^8.16.3"
+  }
+}
