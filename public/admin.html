@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sparcadex Admin</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#07101d;color:#eef6ff}
+.wrap{max-width:1200px;margin:auto;padding:28px}.card{background:#0d1a2b;border:1px solid #1d3552;border-radius:18px;padding:24px}
+.login{max-width:480px;margin:12vh auto}h1{margin:0 0 8px}.muted{color:#91a8bf}
+input{width:100%;padding:13px;margin:10px 0 14px;border-radius:10px;border:1px solid #2b4664;background:#081423;color:white}
+button{border:0;border-radius:10px;padding:11px 15px;background:#168cff;color:white;cursor:pointer;font-weight:700;margin:3px}
+.secondary{background:#203650}.danger{background:#c83f55}.hidden{display:none}
+.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.stat{padding:18px;background:#091626;border:1px solid #1d3552;border-radius:14px}.stat strong{display:block;font-size:28px;margin-top:5px}
+.table{overflow:auto}table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:13px 9px;border-bottom:1px solid #1d3552;vertical-align:top}
+th{color:#8fb0cf;font-size:12px;text-transform:uppercase}.msg{max-width:350px;white-space:pre-wrap}.error{color:#ff7d8e;margin-top:10px}
+@media(max-width:700px){.wrap{padding:14px}.stats{grid-template-columns:1fr}.top{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div id="login" class="wrap login"><div class="card">
+<h1>Sparcadex Admin</h1><p class="muted">Secure inquiry dashboard</p>
+<label>Admin Key</label><input id="key" type="password" placeholder="Enter admin key">
+<button id="loginBtn">Sign in</button><div id="loginMsg"></div>
+</div></div>
+
+<div id="dashboard" class="wrap hidden">
+<div class="top"><div><h1>Inquiry Dashboard</h1><div class="muted">Sparcadex Solutions</div></div>
+<div><button class="secondary" id="refresh">Refresh</button><button class="secondary" id="logout">Logout</button></div></div>
+<div class="stats">
+<div class="stat"><span class="muted">Total inquiries</span><strong id="total">0</strong></div>
+<div class="stat"><span class="muted">Latest inquiry</span><strong id="latest">—</strong></div>
+<div class="stat"><span class="muted">System</span><strong id="system">Checking</strong></div>
+</div>
+<div class="card"><div id="status" class="muted">Loading...</div><div class="table">
+<table><thead><tr><th>Date</th><th>Name</th><th>Contact</th><th>Company</th><th>Project</th><th>Message</th><th>Action</th></tr></thead>
+<tbody id="rows"></tbody></table></div></div>
+</div>
+
+<script>
+let key=sessionStorage.getItem('sparcadex_admin_key')||'';
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+async function api(url,opt={}){
+ const r=await fetch(url,{...opt,headers:{...(opt.headers||{}),'x-admin-key':key}});
+ const d=await r.json().catch(()=>({})); if(!r.ok)throw Error(d.message||'Request failed'); return d;
+}
+function login(){ $('login').classList.add('hidden');$('dashboard').classList.remove('hidden');load(); }
+function logout(){key='';sessionStorage.removeItem('sparcadex_admin_key');$('key').value='';$('dashboard').classList.add('hidden');$('login').classList.remove('hidden');}
+async function load(){
+ $('status').textContent='Loading...';
+ try{
+  const d=await api('/api/admin/inquiries');$('total').textContent=d.count;
+  $('latest').textContent=d.count?new Date(d.inquiries[0].createdAt).toLocaleDateString():'None';
+  $('rows').innerHTML=d.inquiries.map(x=>`<tr><td>${esc(new Date(x.createdAt).toLocaleString())}</td><td><b>${esc(x.name)}</b></td><td>${esc(x.email)}<br>${esc(x.phone||'')}</td><td>${esc(x.company||'—')}</td><td>${esc(x.projectType||'—')}</td><td class="msg">${esc(x.message)}</td><td><button class="danger" onclick="del('${esc(x.id)}')">Delete</button></td></tr>`).join('');
+  $('status').textContent=d.count?'':'No inquiries yet.';
+ }catch(e){$('status').textContent=e.message;$status?.classList?.add('error');if(/unauthorized/i.test(e.message))logout();}
+ try{const r=await fetch('/api/health'),d=await r.json();$('system').textContent=d.database==='connected'?'Online':'DB issue';}catch{$('system').textContent='Offline';}
+}
+async function del(id){if(!confirm('Delete this inquiry permanently?'))return;try{await api('/api/admin/inquiries/'+encodeURIComponent(id),{method:'DELETE'});load();}catch(e){alert(e.message)}}
+$('loginBtn').onclick=async()=>{key=$('key').value.trim();if(!key)return;$('loginMsg').textContent='';sessionStorage.setItem('sparcadex_admin_key',key);try{await api('/api/admin/inquiries');login()}catch(e){key='';sessionStorage.removeItem('sparcadex_admin_key');$('loginMsg').textContent=e.message;$('loginMsg').className='error'}};
+$('key').onkeydown=e=>{if(e.key==='Enter')$('loginBtn').click()};$('refresh').onclick=load;$('logout').onclick=logout;
+if(key)login();
+</script>
+</body></html>
